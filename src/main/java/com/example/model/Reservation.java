@@ -1,0 +1,76 @@
+package com.example.model;
+
+import java.time.LocalDateTime;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Version;
+
+@Entity
+public class Reservation {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(nullable = false)
+    private String salle;
+
+    @Column(nullable = false)
+    private LocalDateTime dateDebut;
+
+    @Column(nullable = false)
+    private LocalDateTime dateFin;
+
+    @Version
+    private int version;
+
+    public Reservation() {
+    }
+
+    public Reservation(String salle, LocalDateTime dateDebut, LocalDateTime dateFin) {
+        this.salle = salle;
+        this.dateDebut = dateDebut;
+        this.dateFin = dateFin;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getSalle() {
+        return salle;
+    }
+
+    public void setSalle(String salle) {
+        this.salle = salle;
+    }
+
+    public LocalDateTime getDateDebut() {
+        return dateDebut;
+    }
+
+    public void setDateDebut(LocalDateTime dateDebut) {
+        this.dateDebut = dateDebut;
+    }
+
+    public LocalDateTime getDateFin() {
+        return dateFin;
+    }
+
+    public void setDateFin(LocalDateTime dateFin) {
+        this.dateFin = dateFin;
+    }
+
+    // Aucun setter : la version est exclusivement gérée par Hibernate.
+    public int getVersion() {
+        return version;
+    }
+
+    @Override
+    public String toString() {
+        return "Reservation{id=" + id + ", salle='" + salle + "', version=" + version + "}";
+    }
+}
